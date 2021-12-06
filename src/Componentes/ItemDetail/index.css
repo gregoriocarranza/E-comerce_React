@@ -1,0 +1,37 @@
+.DetailCard {
+  display: flex;
+  border: 1px solid black;
+  margin: 12vh auto 5px auto;
+  width: 90%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.detailPic {
+  width: 60%;
+  height: auto;
+}
+.DetailCard-child {
+  padding: 5px 0 5px 0;
+}
+.sectioDetailDerecha {
+  display: flex;
+  width: 60%;
+  height: auto;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.sectioDetailIzquierda {
+  width: 38%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+}
+/* .detail{
+  width: 50%;
+  margin: auto;
+} */

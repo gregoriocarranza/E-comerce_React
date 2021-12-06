@@ -1,0 +1,84 @@
+.divHeader {
+  padding: 1vh;
+  background-color: #5f9ea0;
+}
+.sectionImg {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sectionImg .logoCirculo {
+  width: 10vh;
+}
+.sectionImg .logoPalabra {
+  width: 17vh;
+}
+.sectionLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-around;
+}
+.sectionLinks a {
+  margin: 0 10px 0 10px;
+  padding: 10px;
+}
+.linksA {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.linksC {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/* .linksA a {
+  
+} */
+.linksC a {
+  font-size: x-large;
+}
+
+.cart-icon {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px black solid;
+  padding: 5px;
+  top: 15%;
+  left: 23%;
+}
+.ImgCartDropdown {
+  width: 5vh;
+  height: 5vh;
+}
+.titleDropdown {
+  font-size: small;
+}
+.brandDropdown {
+  font-size: x-small;
+}
+.dropdown_cart-card {
+  display: flex;
+  width: 25vh;
+  height: auto;
+  padding: 5px;
+  margin: 3px 0 3px 0;
+  border: 1px black solid;
+}
+
+.btneliminardropdown {
+  font-size: smaller;
+}
+.cart-dropdown {
+  visibility: hidden;
+}
+.cart-icon:hover .cart-dropdown {
+  visibility: visible;
+}
