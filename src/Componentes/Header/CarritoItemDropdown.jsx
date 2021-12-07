@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import BtnEliminar from "../Compras/BtnEliminar";
-import { Link } from "react-router-dom";
+
 import "./index.css";
 function CarritoItemDropdown({ prod }) {
-  const { id, name, brand, imgUrl, detail, price, cantidad } = prod;
+  const { name, brand, imgUrl, price, cantidad } = prod;
   return (
     <Fragment>
       <section className="dropdown_cart-card">
@@ -25,7 +25,11 @@ function CarritoItemDropdown({ prod }) {
           <b className="precioDropdown Childe_drop_cart-card">
             {cantidad}X $ {price}
           </b>
-          <BtnEliminar producto={prod} className="BtnEliminarDropdown" className2="btneliminardropdown" />
+          <BtnEliminar
+            producto={prod}
+            className="BtnEliminarDropdown"
+            className2="btneliminardropdown"
+          />
         </section>
       </section>
     </Fragment>

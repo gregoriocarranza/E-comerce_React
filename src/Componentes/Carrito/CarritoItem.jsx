@@ -2,11 +2,11 @@ import { Fragment } from "react";
 import BtnEliminar from "../Compras/BtnEliminar";
 import { Link } from "react-router-dom";
 import "./index.css";
-function CarritoItem({ prod }) {
-  const { id, name, brand, imgUrl, detail, price, cantidad } = prod;
+function CarritoItem({ cart }) {
+  const { id, name, brand, imgUrl, detail, price, cantidad } = cart;
   return (
     <Fragment>
-      <section className="prod_cart-card">
+      <section className="prod_cart-card" >
         <img className="ImgCart Childe_cart-card" src={imgUrl} alt="name" />
         <section className="details_prod_cart-card">
           <section>
@@ -24,7 +24,11 @@ function CarritoItem({ prod }) {
           <b className="precio Childe_cart-card">
             {cantidad}X $ {price}
           </b>
-          <BtnEliminar producto={prod} className="BtnEliminar" className2="btneliminar" />
+          <BtnEliminar
+            producto={cart}
+            className="BtnEliminar"
+            className2="btneliminar"
+          />
         </section>
       </section>
     </Fragment>

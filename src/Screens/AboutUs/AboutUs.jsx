@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import Carrito from "../../Componentes/Carrito/Carrito";
+
 function aboutUs() {
   return (
     <Fragment>
