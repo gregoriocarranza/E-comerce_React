@@ -6,7 +6,7 @@ function CarritoItem({ cart }) {
   const { id, name, brand, imgUrl, detail, price, cantidad } = cart;
   return (
     <Fragment>
-      <section className="prod_cart-card" >
+      <section className="prod_cart-card">
         <img className="ImgCart Childe_cart-card" src={imgUrl} alt="name" />
         <section className="details_prod_cart-card">
           <section>
@@ -21,9 +21,12 @@ function CarritoItem({ cart }) {
           </section>
         </section>
         <section className="buy_prod_cart-card">
-          <b className="precio Childe_cart-card">
-            {cantidad}X $ {price}
-          </b>
+          <small>
+            <b className="precio Childe_cart-card">
+              {cantidad} Unidades por $ {price} <br />
+              <small>Total de este item: ${cantidad * price}</small>
+            </b>
+          </small>
           <BtnEliminar
             producto={cart}
             className="BtnEliminar"

@@ -1,20 +1,19 @@
-import { Fragment } from "react";
-import Context, { useVarCarrito, useSetCarrito } from "../../Context/Context";
+import { Fragment, useContext } from "react";
+import {ContextWeb,useVarCarrito, useVarTotal } from "../../Context/Context";
 
 import CarritoItem from "./CarritoItem";
-import Opps from "../../Screens/Cart/Opss";
-
 
 function Carrito() {
   const cartList = useVarCarrito();
-  console.log(cartList);
+  const total = useVarTotal();
+  console.log(total)
+  // console.log(cartList);
   return (
     <Fragment>
-      {cartList.length === 0 && <Opps />}
-      {cartList.length > 0 &&(
-        cartList.map((u) => (
-          <CarritoItem key={u.id} cart={u} cartCant={cartList.length} />
-        )))}
+      {cartList.map((u) => (
+        <CarritoItem key={u.id} cart={u} cartCant={cartList.length} />
+      ))}
+      <section className="Pay_footer">Total de tu compra: ${total}</section>
     </Fragment>
   );
 }

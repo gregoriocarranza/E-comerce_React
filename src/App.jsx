@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ContextWeb } from "./Context/Context";
 import "./App.css";
@@ -12,26 +12,21 @@ import AboutUs from "./Screens/AboutUs/AboutUs";
 
 import ItemListContainer from "./Componentes/ItemList/ItemListContainer";
 import ItemListDetail from "./Componentes/ItemDetail/ItemListDetail";
-
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// import { getDatabase } from "firebase/database";
-const config = {
-  apiKey: "AIzaSyAbh9P_7_JlqeeEIECEtT3BPJZQtif-KMg",
-  authDomain: "reactapp-5e203.firebaseapp.com",
-  databaseURL: "https://reactapp-5e203-default-rtdb.firebaseio.com",
-  projectId: "reactapp-5e203",
-  storageBucket: "reactapp-5e203.appspot.com",
-  messagingSenderId: "821563529946",
-  appId: "1:821563529946:web:b9a7012520724ac50fe3e3",
-  measurementId: "G-LS9VNMTVVF",
-};
-
-// const app = initializeApp(config);
-// const analytics = getAnalytics(app);
-// const database = getDatabase(app);
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 
 function App() {
+  // useEffect(() => {
+  //   const db = getFirestore();
+  //   const ref = collection(db, "Productos");
+  //   getDocs(ref).then((snapShot) => {
+  //     if (snapShot) {
+  //       snapShot.docs.map((doc) => {
+  //         console.log(doc.data());
+  //       });
+  //     }
+  //   });
+  // });
+
   return (
     <Fragment>
       <BrowserRouter>
@@ -46,10 +41,7 @@ function App() {
               path="/productos/:productId"
               element={<ItemListDetail />}
             ></Route>
-            <Route
-              path="/categoria/:catId"
-              element={<Productos />}
-            ></Route>
+            <Route path="/categoria/:catId" element={<Productos />}></Route>
 
             <Route path="/carrito" element={<Carrito />}></Route>
             <Route path="/usuario" element={<Usuario />}></Route>
