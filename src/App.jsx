@@ -12,20 +12,10 @@ import AboutUs from "./Screens/AboutUs/AboutUs";
 
 import ItemListContainer from "./Componentes/ItemList/ItemListContainer";
 import ItemListDetail from "./Componentes/ItemDetail/ItemListDetail";
-import { getFirestore, getDocs, collection } from "firebase/firestore";
+
 
 function App() {
-  // useEffect(() => {
-  //   const db = getFirestore();
-  //   const ref = collection(db, "Productos");
-  //   getDocs(ref).then((snapShot) => {
-  //     if (snapShot) {
-  //       snapShot.docs.map((doc) => {
-  //         console.log(doc.data());
-  //       });
-  //     }
-  //   });
-  // });
+
 
   return (
     <Fragment>

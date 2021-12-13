@@ -1,30 +1,22 @@
 import { Fragment, useEffect, useState } from "react";
 import { products } from "../../Js/dataBase";
 import { useParams } from "react-router-dom";
+import { getDoc, doc } from "firebase/firestore";
 
+import db from "../../Js/firebaseInit";
 import ItemDetail from "./ItemDetail";
 
 function ItemListDetail() {
   const [objDetail, setObjDetail] = useState([]);
 
   const { productId } = useParams();
+
   useEffect(() => {
-    const productos = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(products);
-      }, 100);
+    const detailList = doc(db, "Productos", productId);
+    getDoc(detailList).then((respuesta) => {
+      const arrayDetail = { ...respuesta.data(), id: respuesta.id };
+      setObjDetail(arrayDetail);
     });
-
-    productos.then(
-      (result) => {
-        // console.log(Math.floor(productId));
-
-        setObjDetail(result.find((u) => u.id === Math.floor(productId)));
-      },
-      (err) => {
-        console.log("Error");
-      }
-    );
   }, [productId]);
 
   return (

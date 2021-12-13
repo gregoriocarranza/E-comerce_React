@@ -1,6 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
 import { products } from "../../Js/dataBase";
+import db from "../../Js/firebaseInit";
 import { useParams } from "react-router-dom";
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 import Categorias from "./Ordenamiento/Categorias.jsx";
 import ItemList from "./ItemList";
@@ -13,25 +15,16 @@ function ItemListContainer() {
   const { catId } = useParams();
 
   useEffect(() => {
-    const productos = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(products);
-      }, 100);
-    });
+    const list = catId
+      ? query(collection(db, "Productos"), where("categ", "==", Math.floor(catId)))
+      : collection(db, "Productos");
 
-    productos.then(
-      (result) => {
-        // console.log(Math.floor(catId));
-        setobjArray(result.filter((u) => u.categ === Math.floor(catId)));
-        if (catId === undefined) {
-          setobjArray(result);
-          // console.log(catId);
-        }
-      },
-      (err) => {
-        console.log("Error");
-      }
-    );
+    getDocs(list).then((respuesta) => {
+      const arrayProd = respuesta.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
+      setobjArray(arrayProd);
+    });
   }, [catId]);
 
   return (

@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
-
+import { useEffect } from "react";
+import { products } from "../Js/dataBase";
 const Context = React.createContext();
 
 export function ContextWeb({ children }) {
+  const [catalogo, setCatalogo] = useState([]);
   const [carrito, setCarrito] = useState([]);
   const [isCarrito, setIsCarrito] = useState(false);
   const [total, setTotal] = useState(0);
