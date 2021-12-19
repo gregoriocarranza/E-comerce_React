@@ -55,4 +55,4 @@ Uso de React Yarn para la ejecución del proyecto
 
 Carranza Torres Gregorio
 
-2021 - Curso de React en CoderHouse
+2021 - Curso de React en CoderHouse v1
