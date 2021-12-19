@@ -5,6 +5,7 @@ import {
   doc,
   getDocs,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import db from "../Js/firebaseInit";
 import { calculateBackoffMillis } from "@firebase/util";
@@ -14,15 +15,23 @@ export function ContextWeb({ children }) {
   const [carrito, setCarrito] = useState([]);
   const [isCarrito, setIsCarrito] = useState(false);
   const [addCart, setAddCart] = useState(false);
+  const [reload, setReload] = useState(false);
   const [total, setTotal] = useState(1);
 
   useEffect(() => {
     const ref = collection(db, "Carrito");
     getDocs(ref).then((data) => {
       setCarrito(data.docs.map((u) => ({ ...u.data() })));
-      // , id: u.id
+
+      const myTotal = data.docs.reduce(
+        (acumulador, valor) => acumulador + valor.data().subtotal,
+        0
+      );
+      setTotal(myTotal);
     });
-  }, [addCart]);
+  }, [reload]);
+
+  console.log(carrito);
 
   const agregarProducto = (producto, cantidad) => {
     setAddCart(!addCart);
@@ -39,36 +48,31 @@ export function ContextWeb({ children }) {
 
       addDoc(collection(db, "Carrito"), toAdd).then(({ id }) => {
         const ref = doc(db, "Carrito", id);
-
         updateDoc(ref, { SecId: id, cantidad: cantidad });
       });
-      console.log(producto)
-     console.log(producto.price)
-     console.log(cantidad)
-      setTotal(total + producto.price * cantidad);
+      setReload(!reload);
     } else {
       const ref = carrito.find((u) => u.id === producto.id);
-      // console.log(ref.id);
-      // console.log(producto.id);
-      // console.log(ref.SecId)
+
       const toUpdate = doc(db, "Carrito", ref.SecId);
       updateDoc(toUpdate, {
         cantidad: ref.cantidad + cantidad,
       });
-
-      setTotal(total + producto.price * cantidad);
-
+      setReload(!reload);
       return;
     }
     console.log(total);
   };
 
   const fEliminarProducto = (producto) => {
-    const ElimItem = carrito.find((u) => u.id === producto.id);
-    setTotal(total - ElimItem.subtotal);
-    setCarrito(carrito.filter((u) => u.id !== producto.id));
+    console.log("entro");
+    const ref = carrito.find((u) => u.id === producto.id);
 
-    // console.log(producto);
+    deleteDoc(doc(db, "Carrito", ref.SecId));
+    setReload(!reload);
+    // const ElimItem = carrito.find((u) => u.id === producto.id);
+    // setTotal(total - ElimItem.subtotal);
+    // setCarrito(carrito.filter((u) => u.id !== producto.id));
   };
 
   return (
