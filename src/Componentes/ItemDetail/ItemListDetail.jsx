@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { products } from "../../Js/dataBase";
+
 import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 

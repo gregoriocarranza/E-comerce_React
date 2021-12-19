@@ -1,37 +1,64 @@
-import React, { useContext, useState } from "react";
-import { useEffect } from "react";
-import { products } from "../Js/dataBase";
-const Context = React.createContext();
+import React, { useContext, useEffect, useState } from "react";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
+import db from "../Js/firebaseInit";
+import { calculateBackoffMillis } from "@firebase/util";
+const ProductContext = React.createContext();
 
 export function ContextWeb({ children }) {
-  const [catalogo, setCatalogo] = useState([]);
   const [carrito, setCarrito] = useState([]);
   const [isCarrito, setIsCarrito] = useState(false);
-  const [total, setTotal] = useState(0);
+  const [addCart, setAddCart] = useState(false);
+  const [total, setTotal] = useState(1);
+
+  useEffect(() => {
+    const ref = collection(db, "Carrito");
+    getDocs(ref).then((data) => {
+      setCarrito(data.docs.map((u) => ({ ...u.data() })));
+      // , id: u.id
+    });
+  }, [addCart]);
 
   const agregarProducto = (producto, cantidad) => {
+    setAddCart(!addCart);
+
     const check = carrito.find((u) => u.id === producto.id);
     setIsCarrito(true);
-    console.log(carrito);
+
     if (!check) {
-      setCarrito(
-        carrito.concat({
-          ...producto,
-          cantidad: cantidad,
-          subtotal: producto.price * cantidad,
-        })
-      );
+      const toAdd = {
+        ...producto,
+        cantidad,
+        subtotal: producto.price * cantidad,
+      };
+
+      addDoc(collection(db, "Carrito"), toAdd).then(({ id }) => {
+        const ref = doc(db, "Carrito", id);
+
+        updateDoc(ref, { SecId: id, cantidad: cantidad });
+      });
+      console.log(producto)
+     console.log(producto.price)
+     console.log(cantidad)
       setTotal(total + producto.price * cantidad);
     } else {
-      const cartAux = carrito.map((u) => {
-        if (u.id === producto.id) {
-          u.cantidad += cantidad;
-          u.subtotal += producto.price * cantidad;
-        }
-        return u;
+      const ref = carrito.find((u) => u.id === producto.id);
+      // console.log(ref.id);
+      // console.log(producto.id);
+      // console.log(ref.SecId)
+      const toUpdate = doc(db, "Carrito", ref.SecId);
+      updateDoc(toUpdate, {
+        cantidad: ref.cantidad + cantidad,
       });
-      setCarrito(cartAux);
+
       setTotal(total + producto.price * cantidad);
+
+      return;
     }
     console.log(total);
   };
@@ -45,25 +72,31 @@ export function ContextWeb({ children }) {
   };
 
   return (
-    <Context.Provider
-      value={{ carrito, agregarProducto, fEliminarProducto, isCarrito, total }}
+    <ProductContext.Provider
+      value={{
+        carrito,
+        agregarProducto,
+        fEliminarProducto,
+        isCarrito,
+        total,
+      }}
     >
       {children}
-    </Context.Provider>
+    </ProductContext.Provider>
   );
 }
+export default ProductContext;
 
 export function useEliminarCarrito() {
-  return useContext(Context).fEliminarProducto;
+  return useContext(ProductContext).fEliminarProducto;
 }
 export function useVarCarrito() {
-  return useContext(Context).carrito;
+  return useContext(ProductContext).carrito;
 }
 export function useVarTotal() {
-  return useContext(Context).total;
+  return useContext(ProductContext).total;
 }
 
 export function useSetCarrito() {
-  return useContext(Context).agregarProducto;
+  return useContext(ProductContext).agregarProducto;
 }
-export default Context;

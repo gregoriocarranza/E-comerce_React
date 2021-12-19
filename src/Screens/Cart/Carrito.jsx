@@ -1,6 +1,6 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import Carrito from "../../Componentes/Carrito/Carrito";
-import { ContextWeb, useVarCarrito } from "../../Context/Context";
+import { useVarCarrito } from "../../Context/Context";
 
 import NoCarrito from "./NoCarrito";
 

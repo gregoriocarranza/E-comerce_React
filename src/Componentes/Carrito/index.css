@@ -47,9 +47,47 @@
 }
 .precio {
   display: flex;
- 
+
   flex-direction: column;
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
+}
+
+.btnFin {
+  text-align: center;
+  margin: 5px;
+}
+
+.Confimracion {
+  border: 1px black solid;
+  border-radius: 10px;
+  width: 50%;
+  height: 40vh;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.endForm  {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+}
+.endForm  input {
+  margin: 3px;
+  padding: 3px;
+}
+.endForm  button {
+  width: 50%;
+  margin: 5px auto 5px auto;
+}
+.confirmText {
+  margin: auto;
+  width: 90%;
+  align-items: center;
 }
