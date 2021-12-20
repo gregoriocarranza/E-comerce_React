@@ -31,9 +31,7 @@ export function ContextWeb({ children }) {
     });
   }, [reload]);
 
-  console.log(carrito);
-
-  const agregarProducto = (producto, cantidad) => {
+  const agregarProducto = async (producto, cantidad) => {
     setAddCart(!addCart);
 
     const check = carrito.find((u) => u.id === producto.id);
@@ -46,26 +44,31 @@ export function ContextWeb({ children }) {
         subtotal: producto.price * cantidad,
       };
 
-      addDoc(collection(db, "Carrito"), toAdd).then(({ id }) => {
-        const ref = doc(db, "Carrito", id);
-        updateDoc(ref, { SecId: id, cantidad: cantidad });
-      });
+      const { id } = await addDoc(collection(db, "Carrito"), toAdd);
+      console.log("ID QUE VINO", id);
+      const ref = doc(db, "Carrito", id);
+      await updateDoc(ref, { SecId: id, cantidad: cantidad });
       setReload(!reload);
     } else {
       const ref = carrito.find((u) => u.id === producto.id);
-
       const toUpdate = doc(db, "Carrito", ref.SecId);
-      updateDoc(toUpdate, {
+      await updateDoc(toUpdate, {
         cantidad: ref.cantidad + cantidad,
       });
       setReload(!reload);
       return;
     }
-    console.log(total);
   };
-
+  const BorrarCarrito = () => {
+    console.log("CarritoBorrado");
+    carrito.map((u) => {
+      console.log(u.id);
+      deleteDoc(doc(db, "Carrito", u.SecId));
+      setReload(!reload);
+    });
+  };
   const fEliminarProducto = (producto) => {
-    console.log("entro");
+    console.log("Quedo");
     const ref = carrito.find((u) => u.id === producto.id);
 
     deleteDoc(doc(db, "Carrito", ref.SecId));
@@ -83,6 +86,7 @@ export function ContextWeb({ children }) {
         fEliminarProducto,
         isCarrito,
         total,
+        BorrarCarrito,
       }}
     >
       {children}
@@ -103,4 +107,7 @@ export function useVarTotal() {
 
 export function useSetCarrito() {
   return useContext(ProductContext).agregarProducto;
+}
+export function useBorrarCarrito() {
+  return useContext(ProductContext).BorrarCarrito;
 }
