@@ -35,7 +35,7 @@ Uso de React Yarn para la ejecución del proyecto
 3. Luego ejecuta el comando listado para iniciar la pagina
 
    ```console
-   yarn start
+   npm start
 
    ```
 
