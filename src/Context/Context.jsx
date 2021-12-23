@@ -8,7 +8,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import db from "../Js/firebaseInit";
-import { calculateBackoffMillis } from "@firebase/util";
+
 const ProductContext = React.createContext();
 
 export function ContextWeb({ children }) {
@@ -59,7 +59,7 @@ export function ContextWeb({ children }) {
       return;
     }
   };
-  const BorrarCarrito = () => {
+  const BorrarCarrito = async () => {
     console.log("CarritoBorrado");
     carrito.map((u) => {
       console.log(u.id);
@@ -67,11 +67,11 @@ export function ContextWeb({ children }) {
       setReload(!reload);
     });
   };
-  const fEliminarProducto = (producto) => {
+  const fEliminarProducto = async (producto) => {
     console.log("Quedo");
     const ref = carrito.find((u) => u.id === producto.id);
 
-    deleteDoc(doc(db, "Carrito", ref.SecId));
+    await deleteDoc(doc(db, "Carrito", ref.SecId));
     setReload(!reload);
     // const ElimItem = carrito.find((u) => u.id === producto.id);
     // setTotal(total - ElimItem.subtotal);

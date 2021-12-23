@@ -32,10 +32,10 @@ function Carrito() {
       Comprador.Email2 === "" ||
       Comprador.Phone === ""
     ) {
-      setMError(!mError);
+      setMError(true);
       console.log(mError);
       setTimeout(() => {
-        setMError(!mError);
+        setMError(false);
         console.log(mError);
       }, 3000);
     } else {
