@@ -1,6 +1,6 @@
 # > E-commerce
 
-###  Contenido del producto
+### Contenido del producto
 
 - [x] Sección Home
 
@@ -11,25 +11,18 @@
 
 - [x] Sección de Sobre nosotros
 
-- [ ] Sección de usuario 
+- [x] Sección de usuario
 
-- [ ] Sección de Carrito
+- [x] Sección de Carrito
 
-- [ ] Login y registros
-
-  
 
 ## > Dependencias
 
 Uso de React Router Dom para la navegación
 
-
-
 Uso de React Yarn para la ejecución del proyecto
 
-  
-
-##  > Instalacion
+## > Instalacion
 
 1. Descarga el repositorio
 
@@ -41,15 +34,14 @@ Uso de React Yarn para la ejecución del proyecto
 
 3. Luego ejecuta el comando listado para iniciar la pagina
 
-   ````console
+   ```console
    yarn start
-   
-   ````
+
+   ```
+
 ## > Aplicación en funcionamiento
 
-![Deriva en funcionamiento](https://github.com/gregoriocarranza/Clases_Coderhouse_React.js/blob/main/Deriva.gif)
-
-
+![Deriva en funcionamiento](https://github.com/gregoriocarranza/E-comerce_React/blob/main/Deriva.gif)
 
 ### Autor
 
