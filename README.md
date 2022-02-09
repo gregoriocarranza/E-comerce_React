@@ -43,7 +43,7 @@ Uso de React Yarn para la ejecución del proyecto
 
 ![Deriva en funcionamiento](https://github.com/gregoriocarranza/E-comerce_React/blob/main/Deriva.gif)
 
-![Link de la pagina](https://e-comerce-react-e2a9d.web.app/)
+Link de la pagina https://e-comerce-react-e2a9d.web.app/
 ### Autor
 
 Carranza Torres Gregorio
